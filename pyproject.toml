@@ -9,6 +9,7 @@ run = "tic_tac_toe_ai.tic-tac-toe:start"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+numpy = "^1.22.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
