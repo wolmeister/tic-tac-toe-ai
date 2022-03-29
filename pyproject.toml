@@ -2,7 +2,7 @@
 name = "tic-tac-toe-ai"
 version = "0.1.0"
 description = ""
-authors = ["Gabriel Frantz, Victor Wolmeister"]
+authors = ["Gabriel Frantz", "Rafael Siebeneichler", "Victor Wolmeister"]
 
 [tool.poetry.scripts]
 run = "tic_tac_toe_ai.tic-tac-toe:start"
