@@ -110,7 +110,6 @@ class BoardState:
           newHash = newState.getHash()
 
           if newHash not in allStates.keys():
-            print(len(allStates))
             finished = newState.hasFinished()
             allStates[newHash] = (newState, finished)
 
