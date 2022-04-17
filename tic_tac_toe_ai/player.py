@@ -6,6 +6,15 @@ from tic_tac_toe_ai.board_state import BoardState
 from tic_tac_toe_ai.context import Context
 
 class Player:
+  def takeAction(self) -> Tuple[int, int, int]: raise NotImplementedError
+  def feedState(self, state: BoardState): raise NotImplementedError
+
+  def reset(self): raise NotImplementedError
+  def feedReward(self, reward: float): raise NotImplementedError
+  def savePolicy(self): raise NotImplementedError
+  def loadPolicy(self): raise NotImplementedError
+
+class AIPlayer(Player):
   def __init__(self, symbol: int, stepSize = 0.1, exploreRate = 0.1) -> None:
     if symbol != 1 and symbol != -1:
       raise Exception('Symbol must be 1 or -1')
@@ -53,8 +62,8 @@ class Player:
     nextStates: list[int] = []
     nextPositions: list[Tuple[int, int]] = []
 
-    for i in range(3):
-      for j in range(3):
+    for i in range(Context.get().size):
+      for j in range(Context.get().size):
         if state.data[i, j] == 0:
           nextPositions.append([i, j])
           nextStates.append(state.nextState(i, j, self.symbol).getHash())
@@ -87,3 +96,26 @@ class Player:
     fr = open(f"optimal_policy_size_{size}_{self.symbol}", 'rb')
     self.estimations = pickle.load(fr)
     fr.close()
+
+class HumanPlayer(Player):
+  def __init__(self, symbol: int):
+    self.symbol = symbol
+    self.currentState = None
+    return
+
+  def feedState(self, state: BoardState):
+    self.currentState = state
+
+  def reset(self):
+    self.currentState = None
+
+  def takeAction(self):
+    i = int(input("Input your top position:")) - 1
+    j = int(input("Input your left position:")) - 1 
+
+    if self.currentState.data[i, j] != 0:
+        return self.takeAction()
+    return (i, j, self.symbol)
+
+  def feedReward(self, reward: float):
+    pass

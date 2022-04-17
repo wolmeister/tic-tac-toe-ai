@@ -53,8 +53,8 @@ class BoardState:
       diagonalSum = np.trace(boardArray)
       antiDiagonalSum = np.trace(np.fliplr(boardArray))
 
-      if max(abs(diagonalSum), abs(antiDiagonalSum)) == 3:
-        if diagonalSum == 3 or antiDiagonalSum == 3:
+      if max(abs(diagonalSum), abs(antiDiagonalSum)) == self.size:
+        if diagonalSum == self.size or antiDiagonalSum == self.size:
           self.winner = 1
         else:
           self.winner = -1
@@ -110,6 +110,7 @@ class BoardState:
           newHash = newState.getHash()
 
           if newHash not in allStates.keys():
+            print(len(allStates))
             finished = newState.hasFinished()
             allStates[newHash] = (newState, finished)
 
