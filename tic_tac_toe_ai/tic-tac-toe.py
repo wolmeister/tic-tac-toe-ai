@@ -38,6 +38,15 @@ class Board:
         return -1
 
     # Diagonal
+    boardArray = np.asarray(self.board)
+    diagonalSum = np.trace(boardArray)
+    antiDiagonalSum = np.trace(np.fliplr(boardArray))
+
+    if max(abs(diagonalSum), abs(antiDiagonalSum)):
+      self.ended = True
+      if diagonalSum == 3 or antiDiagonalSum == 3:
+        return 1
+      return -1;
 
     # Draw
     if self.countAvailablePositions() == 0:
@@ -135,6 +144,6 @@ def play():
         else:
             print("Tie!")
 
-train()
-compete()
-play() 
+# train()
+# compete()
+# play() 
