@@ -48,8 +48,8 @@ class Judger:
       self.player1.feedReward(0)
       self.player2.feedReward(1)
     else:
-      self.player1.feedReward(0.1)
-      self.player2.feedReward(0.5)
+      self.player1.feedReward(Context.get().player1ExploreRate)
+      self.player2.feedReward(Context.get().player2ExploreRate)
 
   def feedCurrentState(self):
     self.player1.feedState(self.currentState)
